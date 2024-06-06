@@ -1,0 +1,12 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/faris/workspace/projects/faris/array_demo/media/videos/main/480p15/partial_movie_files/SparseVsDense/1185818338_2042031764_223132457.mp4'
+file 'file:/Users/faris/workspace/projects/faris/array_demo/media/videos/main/480p15/partial_movie_files/SparseVsDense/624642324_229896448_3327633640.mp4'
+file 'file:/Users/faris/workspace/projects/faris/array_demo/media/videos/main/480p15/partial_movie_files/SparseVsDense/624642324_665611424_2889188643.mp4'
+file 'file:/Users/faris/workspace/projects/faris/array_demo/media/videos/main/480p15/partial_movie_files/SparseVsDense/624642324_643860649_4131132508.mp4'
+file 'file:/Users/faris/workspace/projects/faris/array_demo/media/videos/main/480p15/partial_movie_files/SparseVsDense/624642324_229896448_3418177514.mp4'
+file 'file:/Users/faris/workspace/projects/faris/array_demo/media/videos/main/480p15/partial_movie_files/SparseVsDense/624642324_773260929_2651734241.mp4'
+file 'file:/Users/faris/workspace/projects/faris/array_demo/media/videos/main/480p15/partial_movie_files/SparseVsDense/624642324_229896448_4273167837.mp4'
+file 'file:/Users/faris/workspace/projects/faris/array_demo/media/videos/main/480p15/partial_movie_files/SparseVsDense/624642324_1365595543_4203458968.mp4'
+file 'file:/Users/faris/workspace/projects/faris/array_demo/media/videos/main/480p15/partial_movie_files/SparseVsDense/624642324_229896448_2485789162.mp4'
+file 'file:/Users/faris/workspace/projects/faris/array_demo/media/videos/main/480p15/partial_movie_files/SparseVsDense/624642324_2360730575_2226120095.mp4'
+file 'file:/Users/faris/workspace/projects/faris/array_demo/media/videos/main/480p15/partial_movie_files/SparseVsDense/624642324_2999291583_3650166347.mp4'
