@@ -1,5 +1,4 @@
 from manim import *
-import random
 
 # Define color schemes
 DAYLIGHT_MODE = {
@@ -19,7 +18,7 @@ DEFAULT_MODE = {
 }
 
 # Choose the mode
-MODE = DAYLIGHT_MODE
+MODE = DAYLIGHT_MODE  # Change to DEFAULT_MODE to switch back
 
 
 class SparseVsDense(Scene):
@@ -27,44 +26,58 @@ class SparseVsDense(Scene):
         self.camera.background_color = MODE["background_color"]
 
         # Title
-        title = Text("Visualizing Dense and Sparse Arrays", color=MODE["text_color"])
+        title = Text("Sparse vs Dense Data Sets", color=MODE["text_color"]).scale(0.8)
+        subtitle = Text("(Welcome to SLCPython, BTW)", color=MODE["text_color"]).scale(0.3).next_to(title, UP)
         self.play(Write(title))
-        self.wait()
+        self.wait(0.8)
+        self.play(Write(subtitle))
+        self.wait(2)
+        self.play(FadeOut(title))
+        self.play(FadeOut(subtitle))
 
-        # Create a dense array
-        dense_array = self.create_array(1000, dense=True)
-        dense_label = Text("Dense Array", color=MODE["text_color"]).next_to(dense_array, UP)
-        self.play(Create(dense_array), Write(dense_label))
-        self.wait()
-        self.play(FadeOut(dense_array), FadeOut(dense_label))
+        # Create a grid for dense data
+        dense_matrix = self.create_matrix(5, 5, dense=True)
+        dense_label = Text("Dense Matrix", color=MODE["text_color"]).scale(0.5).next_to(dense_matrix, UP)
+        self.play(Create(dense_matrix), Write(dense_label))
+        self.wait(1)
+        self.play(FadeOut(dense_matrix), FadeOut(dense_label))
 
-        # Create a sparse array
-        sparse_array = self.create_array(1000, dense=False)
-        sparse_label = Text("Sparse Array", color=MODE["text_color"]).next_to(sparse_array, UP)
-        self.play(Create(sparse_array), Write(sparse_label))
-        self.wait()
+        # Create a grid for sparse data
+        sparse_matrix = self.create_matrix(5, 5, dense=False)
+        sparse_label = Text("Sparse Matrix", color=MODE["text_color"]).scale(0.5).next_to(sparse_matrix, UP)
+        self.play(Create(sparse_matrix), Write(sparse_label))
+        self.wait(1)
+        self.play(FadeOut(sparse_matrix), FadeOut(sparse_label))
 
-        # Explanation
+        # Position matrices side by side
+        dense_matrix_group = VGroup(dense_matrix, dense_label).shift(LEFT * 3)
+        sparse_matrix_group = VGroup(sparse_matrix, sparse_label).shift(RIGHT * 3)
+        self.play(FadeIn(dense_matrix), FadeIn(dense_label))
+        self.play(FadeIn(sparse_matrix), FadeIn(sparse_label))
+        self.play(dense_matrix_group.animate.shift(LEFT * 2), sparse_matrix_group.animate.shift(RIGHT * 2))
+        self.wait(1)
+
+        # Explanation text
         explanation = Text(
-            "Dense arrays store all elements, including zeros.\n"
-            "Sparse arrays store only non-zero elements.",
-            t2c={"Dense arrays": MODE["dense_color"], "Sparse arrays": MODE["sparse_color"]},
+            "Dense matrices store all elements, including zeros.\n"
+            "Sparse matrices store only non-zero elements.",
+            t2c={"Dense matrices": MODE["dense_color"], "Sparse matrices": MODE["sparse_color"]},
             color=MODE["text_color"]
-        ).scale(0.8).to_edge(DOWN)
+        ).scale(0.5).to_edge(DOWN)
         self.play(Write(explanation))
         self.wait(2)
 
-    def create_array(self, size, dense=True):
-        array = VGroup()
-        for i in range(size):
-            value = random.randint(0, 10)
-            if value == 0 and not dense:
-                continue
-            element = Square(side_length=0.2)
-            if value == 0:
-                element.set_fill(MODE["zero_color"], opacity=0.2)
-            else:
-                element.set_fill(MODE["dense_color"] if dense else MODE["sparse_color"], opacity=0.8)
-            element.move_to(np.array([i % 20 - 10, 5 - i // 20, 0]))
-            array.add(element)
-        return array
+    def create_matrix(self, rows, cols, dense=True):
+        matrix = VGroup()
+        for i in range(rows):
+            for j in range(cols):
+                if dense or (i + j) % 2 == 0:  # Sparse condition: only some elements are non-zero
+                    element = Square(side_length=0.5).set_fill(MODE["dense_color"], opacity=0.5)
+                else:
+                    element = Square(side_length=0.5).set_fill(MODE["zero_color"], opacity=0.1)
+                element.move_to(np.array([j - cols / 2, rows / 2 - i, 0]))
+                matrix.add(element)
+        return matrix
+
+# To run the animation, use the following command in your terminal:
+# manim -pql main.py SparseVsDense
