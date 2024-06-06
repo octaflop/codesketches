@@ -8,7 +8,7 @@ class SparseVsDense(Scene):
         self.play(Write(title))
         self.wait(0.8)
         self.play(Write(subtitle))
-        self.wait(10)
+        self.wait(2)
         self.play(FadeOut(title))
         self.play(FadeOut(subtitle))
 
@@ -20,14 +20,17 @@ class SparseVsDense(Scene):
         self.play(FadeOut(dense_matrix), FadeOut(dense_label))
 
         # Create a grid for sparse data
-        sparse_matrix = self.create_matrix(5, 5, dense=False).next_to(dense_matrix, LEFT)
+        sparse_matrix = self.create_matrix(5, 5, dense=False)
         sparse_label = Text("Sparse Matrix").scale(0.5).next_to(sparse_matrix, UP)
         self.play(Create(sparse_matrix), Write(sparse_label))
         self.wait(1)
+        self.play(FadeOut(sparse_matrix), FadeOut(sparse_label))
 
         # Position matrices side by side
         dense_matrix_group = VGroup(dense_matrix, dense_label).shift(LEFT * 3)
         sparse_matrix_group = VGroup(sparse_matrix, sparse_label).shift(RIGHT * 3)
+        self.play(FadeIn(dense_matrix), FadeIn(dense_label))
+        self.play(FadeIn(sparse_matrix), FadeIn(sparse_label))
         self.play(dense_matrix_group.animate.shift(LEFT * 2), sparse_matrix_group.animate.shift(RIGHT * 2))
         self.wait(1)
 
