@@ -1,3 +1,6 @@
+`poetry run manim -p -qk main.py RecorderExample`
+
+
 ```bash
 duckdb -c \  
   "select license->>'key' as license, count(*) as count \
